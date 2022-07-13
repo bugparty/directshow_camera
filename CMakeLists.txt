@@ -2,7 +2,14 @@ cmake_minimum_required(VERSION 3.5)
 
 #******Project******
 project(directshow_camera LANGUAGES CXX)
+# Set Window SDK Path. Change it to your Window SDK Path
+ set(CMAKE_WINDOWS_KITS_10_DIR "C:/Program Files (x86)/Windows Kits/10") 
+ # Set vcpkg path. Change here if the vcpkg folder is not located in your solution folder.
+set(VCPKG_PATH d:/vcpkg)
 
+set(CMAKE_TOOLCHAIN_FILE
+    ${VCPKG_PATH}/scripts/buildsystems/vcpkg.cmake
+    CACHE STRING "Vcpkg toolchain file")
 #******Setting******
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -62,9 +69,9 @@ else()
     #******Test******
 
     include(CTest)
-    if(BUILD_TESTING)
-        enable_testing()
-        add_subdirectory("./test")
-    endif()
+ #   if(BUILD_TESTING)
+ #       enable_testing()
+ #       add_subdirectory("./test")
+ #   endif()
 
 endif()
