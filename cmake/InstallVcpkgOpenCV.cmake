@@ -35,6 +35,7 @@ macro(install_vcpkg_opencv)
             opencv_core
             opencv_imgcodecs
             opencv_imgproc
+            opencv_highgui
             opencv_photo
         )
     else()
@@ -53,6 +54,7 @@ macro(prebuild_copy_vcpkg_opencv_dll PostBuildTarget CopyLocation)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_cored.dll" "${CopyLocation}/Debug/opencv_cored.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_imgcodecsd.dll" "${CopyLocation}/Debug/opencv_imgcodecsd.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_imgprocd.dll" "${CopyLocation}/Debug/opencv_imgprocd.dll"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_highgui.dll" "${CopyLocation}/Debug/opencv_highgui.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_photod.dll" "${CopyLocation}/Debug/opencv_photod.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/tiffd.dll" "${CopyLocation}/Debug/tiffd.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/webpd.dll" "${CopyLocation}/Debug/webpd.dll"
@@ -63,6 +65,7 @@ macro(prebuild_copy_vcpkg_opencv_dll PostBuildTarget CopyLocation)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_core.dll" "${CopyLocation}/Release/opencv_core.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_imgcodecs.dll" "${CopyLocation}/Release/opencv_imgcodecs.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_imgproc.dll" "${CopyLocation}/Release/opencv_imgproc.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_highgui.dll" "${CopyLocation}/Release/opencv_highgui.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_photo.dll" "${CopyLocation}/Release/opencv_photo.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/tiff.dll" "${CopyLocation}/Release/tiff.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/webp.dll" "${CopyLocation}/Release/webp.dll"

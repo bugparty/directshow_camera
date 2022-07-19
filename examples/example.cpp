@@ -4,6 +4,7 @@
 #include "eg4_exposure_fusion.h"
 #include "eg5_disconnect_process.h"
 #include "eg6_stub.h"
+#include "eg7_arpara_camera.h"
 #include <iostream>
 
 int main(int argc, char *argv[])
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
     std::cout << "Example 4: Exposure Fusion." << std::endl;
     std::cout << "Example 5: Disconnect Process." << std::endl;
     std::cout << "Example 6: Stub." << std::endl;
+    std::cout << "Example 7: ArparaCamera." << std::endl;
     std::cout << "Enter the example number: ";
 
     int example_index;
@@ -39,8 +41,12 @@ int main(int argc, char *argv[])
     {
         eg5_disconnect_process();
     }
-        else if (example_index == 6)
+    else if (example_index == 6)
     {
         eg6_stub();
+    }
+    else if (example_index == 7)
+    {
+        eg7_arpara_camera();
     }
 }
