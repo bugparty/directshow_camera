@@ -71,3 +71,6 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+/.idea
+/.vs
+/cmake-build-debug
