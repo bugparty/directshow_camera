@@ -124,6 +124,10 @@ vcpkg commit version: #14121
 
 OpenCV version: 4.3.0 (Option)
 
+libjpeg-turbo[jpeg7]
+
+opencv4
+
 # Installation
 
 ### 1. Install Window SDK
@@ -209,8 +213,9 @@ OpenCV version: 4.3.0 (Option)
 
 4. Install OpenCV by vcpkg
     1. Go to *vcpkg* folder
-    2. Type `vcpkg install opencv:x86-windows`
-    3. Type `vcpkg install opencv:x64-windows`
+	1.  Type `vcpkg install libjpeg-turbo[jpeg7]:x64-windows`
+    1. Type `vcpkg install opencv:x86-windows`
+    1. Type `vcpkg install opencv:x64-windows`
 
 5. Run **build.bat** in Solution folder
 
