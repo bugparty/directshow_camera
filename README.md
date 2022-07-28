@@ -213,9 +213,9 @@ opencv4
 
 4. Install OpenCV by vcpkg
     1. Go to *vcpkg* folder
-	1.  Type `vcpkg install libjpeg-turbo[jpeg7]:x64-windows`
-    1. Type `vcpkg install opencv:x86-windows`
-    1. Type `vcpkg install opencv:x64-windows`
+	2. Type `vcpkg install libjpeg-turbo[jpeg7]:x64-windows`
+    3. Type `vcpkg install opencv:x86-windows`
+    4. Type `vcpkg install opencv:x64-windows`
 
 5. Run **build.bat** in Solution folder
 
