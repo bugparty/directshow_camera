@@ -48,18 +48,18 @@ endmacro()
 macro(prebuild_copy_vcpkg_opencv_dll PostBuildTarget CopyLocation)
 
     add_custom_command(TARGET ${PostBuildTarget} PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/jpeg62.dll" "${CopyLocation}/Debug/jpeg62.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/jpeg7.dll" "${CopyLocation}/Debug/jpeg7.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/libpng16d.dll" "${CopyLocation}/Debug/libpng16d.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/lzmad.dll" "${CopyLocation}/Debug/lzmad.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_cored.dll" "${CopyLocation}/Debug/opencv_cored.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_imgcodecsd.dll" "${CopyLocation}/Debug/opencv_imgcodecsd.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_imgprocd.dll" "${CopyLocation}/Debug/opencv_imgprocd.dll"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_highgui.dll" "${CopyLocation}/Debug/opencv_highgui.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_highgui.dll" "${CopyLocation}/Debug/opencv_highgui.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/opencv_photod.dll" "${CopyLocation}/Debug/opencv_photod.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/tiffd.dll" "${CopyLocation}/Debug/tiffd.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/webpd.dll" "${CopyLocation}/Debug/webpd.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/debug/bin/zlibd1.dll" "${CopyLocation}/Debug/zlibd1.dll"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/jpeg62.dll" "${CopyLocation}/Release/jpeg62.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/jpeg7.dll" "${CopyLocation}/Release/jpeg7.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/libpng16.dll" "${CopyLocation}/Release/libpng16.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/lzma.dll" "${CopyLocation}/Release/lzma.dll"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MY_VCPKG_DEPENDENCIES_DIR}/bin/opencv_core.dll" "${CopyLocation}/Release/opencv_core.dll"
