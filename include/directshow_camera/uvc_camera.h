@@ -52,7 +52,7 @@ namespace DirectShowCamera
 
         // Connection
         bool open(CameraDevice device, int width = -1, int height = -1, bool rgb = true);
-        bool open(DirectShowCameraDevice device, DirectShowVideoFormat* videoFormat = NULL);
+        bool open(DirectShowCameraDevice device, DirectShowVideoFormat* videoFormat = NULL, bool convertGrabberFormat=true);
         bool isOpened();
         bool close();
         bool checkDisconnection();
@@ -229,22 +229,26 @@ namespace DirectShowCamera
         bool isAutoFocus();
         bool setAutoFocus(bool setToAuto);
 
-    /**********************Private********************************/
-    private:
+    protected:
         AbstractDirectShowCamera* m_directShowCamera = NULL;
-
-        unsigned long m_lastFrameIndex = 0;
-        std::string m_errorString;
-
-    #ifdef HAS_OPENCV
+#ifdef HAS_OPENCV
         unsigned char* m_matBuffer = NULL;
         int m_matBufferSize = 0;
         OpenCVMatConverter m_matConvertor;
-    #endif
-        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL);
+
+#endif
+    /**********************Private********************************/
+    private:
 
         // Utils
         void copyError(bool success);
+        unsigned long m_lastFrameIndex = 0;
+        std::string m_errorString;
+
+
+        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL, bool convertGrabberFormat=true);
+
+        // Utils
         int confirmDegreeRange(int degree);
         double exposureConvertion(long dsValue);
         long exposureConvertion(double second);

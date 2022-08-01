@@ -183,7 +183,7 @@ namespace DirectShowCamera
      * @param videoFormat (Option) Video format. Default as NULL which use the default video format.
      * @return Return true if success.
     */
-    bool UVCCamera::open(DirectShowCameraDevice device, DirectShowVideoFormat* videoFormat)
+    bool UVCCamera::open(DirectShowCameraDevice device, DirectShowVideoFormat* videoFormat, bool convertGrabberFormat)
     {
         bool result = false;
 
@@ -194,7 +194,7 @@ namespace DirectShowCamera
         // Open
         if (result)
         {
-            result = open(&videoInputFilter, videoFormat);
+            result = open(&videoInputFilter, videoFormat, convertGrabberFormat);
         }
         else
         {
@@ -213,12 +213,12 @@ namespace DirectShowCamera
      * @param videoFormat Video format
      * @return Return true if success.
     */
-    bool UVCCamera::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat)
+    bool UVCCamera::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat, bool convertGrabberFormat)
     {
         bool result = false;
 
         // Initialize camera
-        result = m_directShowCamera->open(videoInputFilter, videoFormat);
+        result = m_directShowCamera->open(videoInputFilter, videoFormat, convertGrabberFormat);
 
     #ifdef HAS_OPENCV
         if (result)

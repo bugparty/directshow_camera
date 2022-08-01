@@ -55,7 +55,7 @@ namespace DirectShowCamera
      * @param videoFormat Video Format. Look up from DirectShowCameraDevice::getDirectShowVideoFormats()
      * @return Return true if success
     */
-    bool DirectShowCameraStub::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat)
+    bool DirectShowCameraStub::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat, bool convertGrabberFormat)
     {
         m_isOpening = true;
 

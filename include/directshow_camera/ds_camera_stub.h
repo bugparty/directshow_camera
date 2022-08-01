@@ -58,7 +58,7 @@ namespace DirectShowCamera
         ~DirectShowCameraStub();
         void release();
 
-        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL);
+        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL, bool convertGrabberFormat = true);
         void close();
         bool isOpening();
         bool checkDisconnection();

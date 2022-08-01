@@ -115,7 +115,7 @@ namespace DirectShowCamera
      *	"Sample Grabber Filter" -r->[Set] "SampleGrabberCallback"
      * @enduml
     */
-    bool DirectShowCamera::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat)
+    bool DirectShowCamera::open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat,bool convertGrabberFormat)
     {
         // Initialize variable
         HRESULT hr = NOERROR;
@@ -251,7 +251,7 @@ namespace DirectShowCamera
             // Set grabber filter media type
             if (result)
             {
-                updateGrabberFilterVideoFormat();
+                updateGrabberFilterVideoFormat(convertGrabberFormat);
             }
 
             // Create a null renderer filter to discard the samples after you are done with them.
@@ -635,7 +635,7 @@ namespace DirectShowCamera
     /**
      * @brief Update teh grabber filter buffer size and the media type.
     */
-    void DirectShowCamera::updateGrabberFilterVideoFormat()
+    void DirectShowCamera::updateGrabberFilterVideoFormat(bool convertFormatIfPossible)
     {
         if (m_sampleGrabber)
         {
@@ -643,13 +643,13 @@ namespace DirectShowCamera
             int frameTotalSize = 0;
             GUID mediaSubType;
             DirectShowCameraUtils::amMediaTypeDecorator(m_streamConfig,
-                [this, &frameTotalSize, &mediaSubType](AM_MEDIA_TYPE* mediaType)
+                [this, &frameTotalSize, &mediaSubType, convertFormatIfPossible](AM_MEDIA_TYPE* mediaType)
                 {
                     VIDEOINFOHEADER* videoInfoHeader = reinterpret_cast<VIDEOINFOHEADER*>(mediaType->pbFormat);
                     int width = videoInfoHeader->bmiHeader.biWidth;
                     int height = videoInfoHeader->bmiHeader.biHeight;
-
-                    if (DirectShowVideoFormat::supportRGBConvertion(mediaType->subtype))
+                    
+                    if (convertFormatIfPossible && DirectShowVideoFormat::supportRGBConvertion(mediaType->subtype))
                     {
                         // Transform to RGB in the grabber filter
                         frameTotalSize = width * height * 3;

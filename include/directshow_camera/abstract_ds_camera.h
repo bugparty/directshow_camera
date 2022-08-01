@@ -26,7 +26,7 @@ namespace DirectShowCamera
 
         virtual void release() = 0;
 
-        virtual bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL) = 0;
+        virtual bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL, bool convertGrabberFormat=true) = 0;
         virtual void close() = 0;
         virtual bool isOpening() = 0;
         virtual bool checkDisconnection() = 0;

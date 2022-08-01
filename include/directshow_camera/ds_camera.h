@@ -59,7 +59,7 @@ namespace DirectShowCamera
         std::function<void()> m_disconnectionProcess = NULL;
         void startCheckConnectionThread();
 
-        void updateGrabberFilterVideoFormat();
+        void updateGrabberFilterVideoFormat(bool convertFormatIfPossible = false);
         bool updateVideoFormatList();
         void updateVideoFormatIndex();
 
@@ -72,7 +72,7 @@ namespace DirectShowCamera
         ~DirectShowCamera();
         void release();
 
-        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL);
+        bool open(IBaseFilter** videoInputFilter, DirectShowVideoFormat* videoFormat = NULL, bool convertGrabberFormat = true);
         void close();
         bool isOpening();
         bool checkDisconnection();
