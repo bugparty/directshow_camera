@@ -18,7 +18,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
-option(ENABLE_OPENCV_SUPPORT "enable opencv support" OFF)
+option(ENABLE_OPENCV "enable opencv support" ON)
+
+set(CONFIG_HEADER_DIR ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME})
+file(REMOVE ${CONFIG_HEADER_DIR}/ds_libs_setting.h)
+if (ENABLE_OPENCV)
+  set(HAS_OPENCV true)
+endif()
+configure_file(include/directshow_camera/ds_libs_setting.h.in include/directshow_camera/ds_libs_setting.h)
+include_directories(${CONFIG_HEADER_DIR})
+
 # Check static library or executable
 if(NOT ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     set(DIRECTSHOWCAMERA_AS_STATIC_LIBRARY TRUE)
@@ -29,10 +38,10 @@ set(DIRECTSHOWCAMERA_ROOT_PATH ${CMAKE_SOURCE_DIR})
 
 # Add cmake module
 list(APPEND CMAKE_MODULE_PATH "${DIRECTSHOWCAMERA_ROOT_PATH}/cmake")
-if(ENABLE_OPENCV_SUPPORT)
+if(ENABLE_OPENCV)
  include(InstallVcpkgOpenCV)
 endif()
-#  include(InstallVcpkgOpenCV)
+
 include(AddVcpkg)
 include(AddWin10SDK)
 
@@ -55,24 +64,23 @@ else()
     add_window10_sdk()
 
     # OpenCV
-if(ENABLE_OPENCV_SUPPORT)
-#   Install OpenCV in vcpkg. See cmake/InstallVcpkgOpenCV.cmake
- install_vcpkg_opencv()
-#   Link OpenCV 
- include_directories( ${OpenCV_INCLUDE_DIRS} )
- link_directories( ${OpenCV_LIB_DIR} )
-endif()
-
-
+    if(ENABLE_OPENCV)
+    #   Install OpenCV in vcpkg. See cmake/InstallVcpkgOpenCV.cmake
+     install_vcpkg_opencv()
+    #   Link OpenCV 
+     include_directories( ${OpenCV_INCLUDE_DIRS} )
+     link_directories( ${OpenCV_LIB_DIR} )
+    endif()
 
 
     #******Source******
+
     add_subdirectory("./src")
 
     #******Example******
-if(ENABLE_OPENCV_SUPPORT)	
-    add_subdirectory("./examples")
-endif()
+    if(ENABLE_OPENCV)
+        add_subdirectory("./examples")
+    endif()
     #******Test******
 
     include(CTest)

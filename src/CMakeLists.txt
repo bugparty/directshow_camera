@@ -7,7 +7,7 @@ file(GLOB_RECURSE MY_SOURCE_FILES
     "${MY_HEADER_DIR}/*.h" "${MY_HEADER_DIR}/*.hpp" "${MY_HEADER_DIR}/*.cpp"
 )
 
-if(NOT ENABLE_OPENCV_SUPPORT)
+if(NOT ENABLE_OPENCV)
 list(REMOVE_ITEM MY_SOURCE_FILES ${MY_SOURCE_DIR}/uvc_camera_looper.cpp)
 list(REMOVE_ITEM MY_SOURCE_FILES ${MY_HEADER_DIR}/uvc_camera_looper.h)
 message("files ${MY_SOURCE_FILES}")
