@@ -893,7 +893,8 @@ namespace DirectShowCamera
             else
             {
                 // Set
-                hr = m_streamConfig->SetFormat(m_videoFormats->at(videoFormatIndex)->getAMMediaType());
+                AM_MEDIA_TYPE* format = m_videoFormats->at(videoFormatIndex)->getAMMediaType();
+                hr = m_streamConfig->SetFormat(format);
                 result = DirectShowCameraUtils::checkIIAMSCSetFormatResult(hr, &m_errorString, "Error on setting camera resolution");
 
                 if (result)

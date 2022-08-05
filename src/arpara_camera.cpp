@@ -32,8 +32,7 @@ namespace DirectShowCamera
         allocateImageBuffer();
         bool result = getFrame(mYuyBuffer, NULL, onlyGetNewFrame);
         if (!result) return nullptr;
-        yuy2toGrey(mYuyBuffer, mGrayBuffer, getHeight(), getWidth());
-        return mGrayBuffer;
+        return mYuyBuffer;
     }
     /**
  * @brief Allocate yuy2 and gray image buffer
@@ -43,19 +42,15 @@ namespace DirectShowCamera
     {
         if (mGreyBufferSize != getHeight() * getWidth())
         {
-            mGreyBufferSize = getHeight() * getWidth();
+            //the ov580 return a y8 grey image instead of yuy2 image
+            mGreyBufferSize = getHeight() * getWidth()*2;
             if (mYuyBuffer != nullptr)
             {
                 delete[] mYuyBuffer;
             }
-            if (mGrayBuffer != nullptr)
-            {
-                delete[] mGrayBuffer;
-            }
-            mGrayBuffer = new unsigned char[mGreyBufferSize];
-            mYuyBuffer = new unsigned char[mGreyBufferSize * 2];
+            mYuyBuffer = new unsigned char[mGreyBufferSize];
         }
-        return mGrayBuffer && mYuyBuffer;
+        return mYuyBuffer;
     }
 
 #ifdef HAS_OPENCV
@@ -79,9 +74,8 @@ namespace DirectShowCamera
 
         if (success)
         {
-            //strip y channel out to grey
-            yuy2toGrey(m_matBuffer, mMatDstBuffer, getHeight(), getWidth());
-            cv::Mat out2(getHeight(), getWidth(), CV_8UC1, mMatDstBuffer);
+           //treat the yuy2 image as 1280 * 481 y8 grey mat
+            cv::Mat out2(getHeight(), getWidth() * 2, CV_8UC1, m_matBuffer);
             return out2;
         }
         else
