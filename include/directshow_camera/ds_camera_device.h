@@ -4,6 +4,7 @@
 
 //************Content************
 #include <ds_video_format.h>
+#include <mutex>
 
 #include <string>
 #include <vector>
@@ -17,12 +18,16 @@ namespace DirectShowCamera
     {
         public:
             DirectShowCameraDevice(std::string friendlyName, std::string description, std::string devicePath, std::vector<DirectShowVideoFormat> videoFormats);
-
+            DirectShowCameraDevice(const DirectShowCameraDevice& other);
+            DirectShowCameraDevice(DirectShowCameraDevice&& other);
             std::vector<DirectShowVideoFormat> getDirectShowVideoFormats();
             std::string getFriendlyName();
             std::string getDescription();
             std::string getDevicePath();
-
+            std::string getVid();
+            void parseDevicePath();
+            std::string getPid();
+            int getUsbInterfaceNumber();
             // Operator
 
             bool operator == (const DirectShowCameraDevice& device) const
@@ -75,6 +80,15 @@ namespace DirectShowCamera
             std::string m_friendlyName;
             std::string m_description;
             std::string m_devicePath;
+            bool parsedDevicePath = false;
+            std::string m_vid;
+            std::string m_pid;
+            int m_usbInterfaceNumber = 1;
+            bool m_isUnderUsbCompositeDevice = false;
+            std::mutex parseDevicePathMutex;
+            void parseDevicePathImpl();
+
+
     };
 }
 

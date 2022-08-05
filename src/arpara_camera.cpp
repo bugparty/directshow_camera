@@ -1,6 +1,19 @@
 #include "arpara_camera.h"
 namespace DirectShowCamera
 {
+	ArparaCamera::~ArparaCamera()
+	{
+		if(mGrayBuffer != nullptr)
+		{
+			delete[]mGrayBuffer;
+		}
+#ifdef HAS_OPENCV
+		if(mMatDstBuffer != nullptr)
+		{
+			delete [] mMatDstBuffer;
+		}
+#endif
+	}
 
     std::vector<CameraDevice> ArparaCamera::getArparaCameras() {
         auto cameras = getCameras();
@@ -34,6 +47,8 @@ namespace DirectShowCamera
         if (!result) return nullptr;
         return mYuyBuffer;
     }
+
+
     /**
  * @brief Allocate yuy2 and gray image buffer
  * @return Return true if success
@@ -44,10 +59,7 @@ namespace DirectShowCamera
         {
             //the ov580 return a y8 grey image instead of yuy2 image
             mGreyBufferSize = getHeight() * getWidth()*2;
-            if (mYuyBuffer != nullptr)
-            {
-                delete[] mYuyBuffer;
-            }
+            delete[] mYuyBuffer;
             mYuyBuffer = new unsigned char[mGreyBufferSize];
         }
         return mYuyBuffer;
@@ -94,9 +106,9 @@ namespace DirectShowCamera
         std::vector<DirectShowCameraDevice> arparaCameras;
         for (auto& camera : result)
         {
-            if (camera.getFriendlyName().find("OV580") != std::string::npos)
+            if (camera.getPid() == "0680" && camera.getVid() == "05a9")
             {
-                arparaCameras.push_back(camera);
+                arparaCameras.push_back(std::move(camera));
             }
         }
         return arparaCameras;
@@ -111,10 +123,7 @@ namespace DirectShowCamera
         if (mMatDstBufferSize != getHeight() * getWidth())
         {
             mMatDstBufferSize = getHeight() * getWidth();
-            if (mMatDstBuffer != nullptr)
-            {
-                delete[] mMatDstBuffer;
-            }
+            delete[] mMatDstBuffer;
             mMatDstBuffer = new unsigned char[mMatDstBufferSize];
         }
     }

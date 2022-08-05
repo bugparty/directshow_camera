@@ -7,6 +7,7 @@
 #include "eg7_arpara_camera.h"
 #include "eg8_direct_arpara_camera.h"
 #include "eg9_direct_arpara_camera.h"
+#include "eg10_dual_arpara_camera.h"
 #include <iostream>
 
 int main(int argc, char *argv[])
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
     std::cout << "Example 7: ArparaCamera." << std::endl;
     std::cout << "Example 8: Direct ArparaCamera." << std::endl;
     std::cout << "Example 9: Direct ArparaCamera without opencv enable" << std::endl;
+    std::cout << "Example 10: Dual ArparaCamera." << std::endl;
     std::cout << "Enter the example number: ";
 
     int example_index;
@@ -57,8 +59,11 @@ int main(int argc, char *argv[])
     {
         eg8_arpara_camera();
     }
-    else
+    else if ( example_index == 9)
     {
         eg9_arpara_camera();
+    }else if (example_index == 10)
+    {
+        eg10_dual_camera();
     }
 }

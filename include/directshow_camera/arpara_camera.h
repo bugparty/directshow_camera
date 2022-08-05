@@ -5,19 +5,7 @@ namespace DirectShowCamera
 	class ArparaCamera : public UVCCamera {
 		using UVCCamera::UVCCamera;
 	public:
-		~ArparaCamera()
-		{
-			if(mGrayBuffer != nullptr)
-			{
-				delete[]mGrayBuffer;
-			}
-#ifdef HAS_OPENCV
-			if(mMatDstBuffer != nullptr)
-			{
-				delete [] mMatDstBuffer;
-			}
-#endif
-		}
+		~ArparaCamera();
 		std::vector<CameraDevice> getArparaCameras();
 		
 		std::vector<DirectShowCameraDevice> getDirectShowArparaCameras();
