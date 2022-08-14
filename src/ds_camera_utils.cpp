@@ -59,7 +59,7 @@ namespace DirectShowCameraUtils
     bool checkCreateClassEnumeratorResult(HRESULT hr, std::string* errorString, std::string errorDescription)
     {
         bool result = true;
-        if (!SUCCEEDED(hr))
+        if (FAILED(hr) || hr == S_FALSE)
         {
             result = false;
 
