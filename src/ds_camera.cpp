@@ -563,7 +563,7 @@ namespace DirectShowCamera
     {
         if (m_isCapturing && frame)
         {
-            m_sampleGrabberCallback->getFrame(frame, frameIndex, numOfBytes, copyNewFrameOnly, previousFrameIndex);
+            m_sampleGrabberCallback->getFrame(frame, frameIndex, numOfBytes, copyNewFrameOnly, previousFrameIndex, nullptr);
             return true;
         }
         else

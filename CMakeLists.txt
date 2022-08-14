@@ -83,10 +83,12 @@ else()
     endif()
     #******Test******
 
-    include(CTest)
- #   if(BUILD_TESTING)
- #       enable_testing()
- #       add_subdirectory("./test")
- #   endif()
 
+    if(BUILD_TESTING)
+        find_package(GTest CONFIG REQUIRED)
+        enable_testing()
+        add_subdirectory("./test")
+    endif()
+
+    add_subdirectory("./experiments")
 endif()

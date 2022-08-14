@@ -57,7 +57,8 @@ namespace DirectShowCamera
      * @param[in] previousFrameIndex (Option) The previous frame index. It use to identify whether the current frame is a new frame. Default as 0.
      * @return Return true if the current is copied. If a new frame is required and the frame doesn't change, it will returns false. If eroor occurred, it return false.
     */
-    bool SampleGrabberCallback::getFrame(unsigned char* frame, unsigned long* frameIndex, int* numOfBytes, bool copyNewFrameOnly, unsigned long previousFrameIndex)
+    bool SampleGrabberCallback::getFrame(unsigned char* frame, unsigned long* frameIndex, int* numOfBytes, bool copyNewFrameOnly, unsigned long previousFrameIndex, std
+                                         ::chrono::system_clock::time_point* timestamp)
     {
         int currentframeIndex = m_frameIndex;
         bool result = false;
@@ -153,8 +154,14 @@ namespace DirectShowCamera
 
         // Get data
         unsigned char* directShowBufferPointer;
+        REFERENCE_TIME  start, end;
+        HRESULT hrMediaTime = pSample->GetTime(&start, &end);
+        if (hrMediaTime == S_OK)
+        {
+            static_cast<void>(std::chrono::system_clock::now());
+        }
         HRESULT hr = pSample->GetPointer(&directShowBufferPointer);
-
+       
         if (hr == S_OK) {
 
             // Get frame data size

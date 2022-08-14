@@ -36,7 +36,7 @@ void eg10_dual_camera()
     cv::Mat frame;
     while (true)
     {
-        frame = cv::Mat(960, 1280, CV_8UC1, camera.getImage(data));
+        frame = cv::Mat(camera.getHeight(), camera.getWidth(), CV_8UC1, camera.getImage(data));
         cv::imshow("frame", frame);
         char key = cv::waitKey(1);
         if (key == 'q')
@@ -44,7 +44,7 @@ void eg10_dual_camera()
             break;
         }else if (key == 's')
         {
-            std::fstream ofile("481_1280_gray.bin", std::ios::out | std::ios::binary);
+            std::fstream ofile("960_1280_gray.bin", std::ios::out | std::ios::binary);
             ofile.write(reinterpret_cast<char*>(frame.data), frame.total() * frame.elemSize());
             ofile.close();
             std::cout << "file saved to" << std::filesystem::current_path().string() + "\\960_1280_gray.bin" << std::endl;

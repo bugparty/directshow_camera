@@ -1,0 +1,19 @@
+# Create example project name
+set(EXPERIMENT_PROJECT_NAME ${PROJECT_NAME}_experiment)
+
+# Get example files
+file(GLOB_RECURSE MY_EXAMPLE_FILES "*.h" "*.hpp" "*.cpp")
+
+# Add sources files
+add_executable(${EXPERIMENT_PROJECT_NAME} ${MY_EXAMPLE_FILES})
+
+# Link header files
+target_include_directories(${EXPERIMENT_PROJECT_NAME}
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+# Post-build process to copy dll from vcpkg
+prebuild_copy_vcpkg_opencv_dll(${EXPERIMENT_PROJECT_NAME} "${CMAKE_BINARY_DIR}/experiments")
+
+# Link source library
+target_link_libraries(${EXPERIMENT_PROJECT_NAME} LINK_PUBLIC ${PROJECT_NAME} ${OpenCV_LIBS})

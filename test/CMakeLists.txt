@@ -1,16 +1,7 @@
 # Create example project name
 set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
-# Get google test
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  # Updated on 22/6/2021, Update the commit if latest is available
-  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
 
 # Get example files
 file(GLOB_RECURSE MY_TEST_FILES "*.cpp")
