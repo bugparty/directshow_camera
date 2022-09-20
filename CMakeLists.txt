@@ -80,6 +80,7 @@ else()
     #******Example******
     if(ENABLE_OPENCV)
         add_subdirectory("./examples")
+        add_subdirectory("./experiments")
     endif()
     #******Test******
 
@@ -90,5 +91,5 @@ else()
         add_subdirectory("./test")
     endif()
 
-    add_subdirectory("./experiments")
+   
 endif()
